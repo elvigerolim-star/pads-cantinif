@@ -2,12 +2,7 @@
 // estas funções só servem para exibir e validar antes do envio — nunca para decidir preço ou status.
 
 export type StatusPedido =
-  | "recebido"
-  | "aguardando_pagamento"
-  | "em_separacao"
-  | "pronto"
-  | "entregue"
-  | "cancelado";
+  "recebido" | "aguardando_pagamento" | "em_separacao" | "pronto" | "entregue" | "cancelado";
 export type StatusPagamento = "pendente" | "confirmado" | "falhou";
 export type MotivoCancelamento = "itens_indisponiveis" | "pagamento_falhou";
 export type Categoria = "salgado" | "bebida" | "doce";
@@ -78,11 +73,16 @@ export type ItemCarrinho = { id_produto: string; quantidade: number };
 /** Validação local (tela E04). O servidor repete todas estas verificações. */
 export function validarCarrinho(itens: ReadonlyArray<ItemCarrinho>): string | null {
   if (itens.length === 0) return "Adicione pelo menos um item ao pedido.";
-  if (itens.length > MAX_ITENS_DISTINTOS) return `Máximo de ${MAX_ITENS_DISTINTOS} produtos diferentes por pedido.`;
+  if (itens.length > MAX_ITENS_DISTINTOS)
+    return `Máximo de ${MAX_ITENS_DISTINTOS} produtos diferentes por pedido.`;
   const ids = new Set(itens.map((i) => i.id_produto));
   if (ids.size !== itens.length) return "Há itens duplicados no pedido.";
   for (const i of itens) {
-    if (!Number.isInteger(i.quantidade) || i.quantidade < 1 || i.quantidade > MAX_QUANTIDADE_POR_ITEM) {
+    if (
+      !Number.isInteger(i.quantidade) ||
+      i.quantidade < 1 ||
+      i.quantidade > MAX_QUANTIDADE_POR_ITEM
+    ) {
       return `Cada item deve ter quantidade entre 1 e ${MAX_QUANTIDADE_POR_ITEM}.`;
     }
   }
@@ -98,7 +98,8 @@ const MENSAGENS: Record<string, string> = {
   MUITOS_ITENS: "Pedido com itens demais.",
   QUANTIDADE_INVALIDA: `Cada item deve ter quantidade entre 1 e ${MAX_QUANTIDADE_POR_ITEM}.`,
   ITEM_DUPLICADO: "Há itens duplicados no pedido.",
-  PRODUTO_INDISPONIVEL: "Um ou mais produtos ficaram indisponíveis. Atualize o cardápio e revise o pedido.",
+  PRODUTO_INDISPONIVEL:
+    "Um ou mais produtos ficaram indisponíveis. Atualize o cardápio e revise o pedido.",
   LIMITE_PEDIDOS_ATIVOS: "Você já tem 3 pedidos em andamento. Aguarde a retirada de algum deles.",
   SEM_SENHA_DISPONIVEL: "A cantina está com muitos pedidos agora. Tente novamente em instantes.",
   PEDIDO_NAO_ENCONTRADO: "Pedido não encontrado.",
@@ -115,7 +116,8 @@ export function mensagemErro(erro: unknown): string {
       ? String((erro as { message: unknown }).message)
       : String(erro ?? "");
   if (MENSAGENS[msg]) return MENSAGENS[msg];
-  if (/fetch|network/i.test(msg)) return "Sem conexão com o servidor. Verifique a internet e tente de novo.";
+  if (/fetch|network/i.test(msg))
+    return "Sem conexão com o servidor. Verifique a internet e tente de novo.";
   return "Não foi possível concluir a ação. Tente novamente.";
 }
 

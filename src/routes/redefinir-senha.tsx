@@ -30,7 +30,10 @@ function RedefinirSenha() {
       const { data: s } = await supabase.auth.getSession();
       setEstado((e) => (e === "verificando" ? (s.session ? "pronto" : "invalido") : e));
     }, 1500);
-    return () => { data.subscription.unsubscribe(); clearTimeout(t); };
+    return () => {
+      data.subscription.unsubscribe();
+      clearTimeout(t);
+    };
   }, []);
 
   return (
@@ -40,9 +43,15 @@ function RedefinirSenha() {
       {estado === "ok" && <SenhaRedefinida perfil="aluno" />}
       {estado === "invalido" && (
         <div role="alert" className="space-y-4">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">E10 · Link inválido</p>
-          <p className="text-muted-foreground">Este link de recuperação é inválido ou expirou. Peça um novo código.</p>
-          <Button asChild variant="hero" className="w-full"><Link to="/recuperar-senha">Pedir novo código</Link></Button>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            E10 · Link inválido
+          </p>
+          <p className="text-muted-foreground">
+            Este link de recuperação é inválido ou expirou. Peça um novo código.
+          </p>
+          <Button asChild variant="hero" className="w-full">
+            <Link to="/recuperar-senha">Pedir novo código</Link>
+          </Button>
         </div>
       )}
     </AuthLayout>

@@ -131,7 +131,9 @@ export const painelQuery = queryOptions({
     const { data, error } = await supabase
       .from("pedido")
       .select(PEDIDO_COLS_CANTINA)
-      .or(`status.in.(recebido,aguardando_pagamento,em_separacao,pronto),criado_em.gte.${desde.toISOString()}`)
+      .or(
+        `status.in.(recebido,aguardando_pagamento,em_separacao,pronto),criado_em.gte.${desde.toISOString()}`,
+      )
       .order("criado_em", { ascending: true })
       .limit(300);
     if (error) throw error;
@@ -146,7 +148,12 @@ export function formatarHora(iso: string | null | undefined): string {
 }
 export function formatarDataHora(iso: string | null | undefined): string {
   if (!iso) return "—";
-  return new Date(iso).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+  return new Date(iso).toLocaleString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
 export function redirectSeguro(valor: string | undefined, padrao: string): string {

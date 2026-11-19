@@ -8,7 +8,10 @@ export const Route = createFileRoute("/entrar")({
   head: () => ({
     meta: [
       { title: "Entrar — PADS CantinIF" },
-      { name: "description", content: "Entre com sua conta de aluno para pedir lanches na cantina." },
+      {
+        name: "description",
+        content: "Entre com sua conta de aluno para pedir lanches na cantina.",
+      },
       { property: "og:title", content: "Entrar — PADS CantinIF" },
       { property: "og:description", content: "Acesso do aluno ao pedido antecipado de lanche." },
       { property: "og:type", content: "website" },
@@ -21,7 +24,11 @@ export const Route = createFileRoute("/entrar")({
 function Entrar() {
   const { redirect } = Route.useSearch();
   return (
-    <AuthLayout codigo="A00 · Entrar" titulo="Entrar no PADS" subtitulo="Use o e-mail e a senha da sua conta de aluno.">
+    <AuthLayout
+      codigo="A00 · Entrar"
+      titulo="Entrar no PADS"
+      subtitulo="Use o e-mail e a senha da sua conta de aluno."
+    >
       <LoginForm perfil="aluno" redirect={redirect} />
     </AuthLayout>
   );

@@ -5,7 +5,10 @@ export const Route = createFileRoute("/_authenticated/cantina")({
   head: () => ({
     meta: [
       { title: "Cantina — PADS CantinIF" },
-      { name: "description", content: "Painel do atendente: conferência, pagamento simulado, separação e entrega." },
+      {
+        name: "description",
+        content: "Painel do atendente: conferência, pagamento simulado, separação e entrega.",
+      },
       { property: "og:title", content: "Cantina — PADS" },
       { property: "og:description", content: "Painel do atendente da cantina." },
       { property: "og:type", content: "website" },
