@@ -85,9 +85,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "PADS — Pedido Antecipado de Lanche na Cantina | CantinIF" },
-      { name: "description", content: "Protótipo escolar: peça o lanche da cantina com antecedência e retire com senha." },
+      {
+        name: "description",
+        content: "Protótipo escolar: peça o lanche da cantina com antecedência e retire com senha.",
+      },
       { property: "og:title", content: "PADS — CantinIF" },
-      { property: "og:description", content: "Protótipo escolar de pedido antecipado de lanche na cantina." },
+      {
+        property: "og:description",
+        content: "Protótipo escolar de pedido antecipado de lanche na cantina.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

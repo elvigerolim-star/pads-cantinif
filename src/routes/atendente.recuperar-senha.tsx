@@ -14,7 +14,11 @@ export const Route = createFileRoute("/atendente/recuperar-senha")({
     ],
   }),
   component: () => (
-    <AuthLayout perfil="cantina" titulo="Recuperar senha" subtitulo="Informe o e-mail da sua conta de atendente.">
+    <AuthLayout
+      perfil="cantina"
+      titulo="Recuperar senha"
+      subtitulo="Informe o e-mail da sua conta de atendente."
+    >
       <RecoveryFlow perfil="cantina" />
     </AuthLayout>
   ),

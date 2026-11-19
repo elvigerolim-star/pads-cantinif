@@ -12,7 +12,13 @@ const ESTILO: Record<StatusPedido, string> = {
 
 export function StatusBadge({ status, className }: { status: StatusPedido; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold", ESTILO[status], className)}>
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold",
+        ESTILO[status],
+        className,
+      )}
+    >
       <span className="size-1.5 rounded-full bg-current" aria-hidden="true" />
       {STATUS_LABEL[status]}
     </span>

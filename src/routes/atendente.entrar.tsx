@@ -21,7 +21,12 @@ export const Route = createFileRoute("/atendente/entrar")({
 function EntrarCantina() {
   const { redirect } = Route.useSearch();
   return (
-    <AuthLayout perfil="cantina" codigo="O00 · Entrar" titulo="Painel da cantina" subtitulo="Acesso exclusivo para atendentes.">
+    <AuthLayout
+      perfil="cantina"
+      codigo="O00 · Entrar"
+      titulo="Painel da cantina"
+      subtitulo="Acesso exclusivo para atendentes."
+    >
       <LoginForm perfil="cantina" redirect={redirect} />
     </AuthLayout>
   );

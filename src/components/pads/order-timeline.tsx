@@ -15,25 +15,41 @@ export function OrderTimeline({ pedido }: { pedido: PedidoCompleto }) {
     { chave: "entregue", titulo: "Entregue", hora: pedido.retirado_em },
   ];
   const ordem: Record<string, number> = {
-    recebido: 1, aguardando_pagamento: 2, em_separacao: 4, pronto: 5, entregue: 6,
+    recebido: 1,
+    aguardando_pagamento: 2,
+    em_separacao: 4,
+    pronto: 5,
+    entregue: 6,
   };
   let feitas = ordem[pedido.status] ?? 0;
   let falhaEm = -1;
   if (pedido.status === "cancelado") {
-    if (pedido.motivo_cancelamento === "itens_indisponiveis") { feitas = 1; falhaEm = 1; }
-    else { feitas = 2; falhaEm = 2; }
+    if (pedido.motivo_cancelamento === "itens_indisponiveis") {
+      feitas = 1;
+      falhaEm = 1;
+    } else {
+      feitas = 2;
+      falhaEm = 2;
+    }
   }
   return (
     <ol className="relative space-y-0" aria-label="Andamento do pedido">
       {etapas.map((e, i) => {
         const concluida = i < feitas;
         const falhou = i === falhaEm;
-        const atual = !falhou && i === feitas && pedido.status !== "cancelado" && pedido.status !== "entregue";
+        const atual =
+          !falhou && i === feitas && pedido.status !== "cancelado" && pedido.status !== "entregue";
         const ultima = i === etapas.length - 1;
         return (
           <li key={e.chave} className="relative flex gap-3 pb-5 last:pb-0">
             {!ultima && (
-              <span className={cn("absolute left-[13px] top-7 h-[calc(100%-1.75rem)] w-0.5", concluida ? "bg-success" : "bg-border")} aria-hidden="true" />
+              <span
+                className={cn(
+                  "absolute left-[13px] top-7 h-[calc(100%-1.75rem)] w-0.5",
+                  concluida ? "bg-success" : "bg-border",
+                )}
+                aria-hidden="true"
+              />
             )}
             <span
               className={cn(
@@ -45,14 +61,35 @@ export function OrderTimeline({ pedido }: { pedido: PedidoCompleto }) {
               )}
               aria-hidden="true"
             >
-              {falhou ? <X className="size-3.5" /> : concluida ? <Check className="size-3.5" /> : i + 1}
+              {falhou ? (
+                <X className="size-3.5" />
+              ) : concluida ? (
+                <Check className="size-3.5" />
+              ) : (
+                i + 1
+              )}
             </span>
             <div className="pt-0.5">
-              <p className={cn("text-sm font-semibold", !concluida && !atual && !falhou && "text-muted-foreground")}>
+              <p
+                className={cn(
+                  "text-sm font-semibold",
+                  !concluida && !atual && !falhou && "text-muted-foreground",
+                )}
+              >
                 {e.titulo}
-                <span className="sr-only">{falhou ? " — não concluída" : concluida ? " — concluída" : atual ? " — etapa atual" : " — pendente"}</span>
+                <span className="sr-only">
+                  {falhou
+                    ? " — não concluída"
+                    : concluida
+                      ? " — concluída"
+                      : atual
+                        ? " — etapa atual"
+                        : " — pendente"}
+                </span>
               </p>
-              {concluida && !falhou && e.hora && <p className="text-xs text-muted-foreground">{formatarHora(e.hora)}</p>}
+              {concluida && !falhou && e.hora && (
+                <p className="text-xs text-muted-foreground">{formatarHora(e.hora)}</p>
+              )}
               {atual && <p className="text-xs font-medium text-primary">Etapa atual</p>}
             </div>
           </li>

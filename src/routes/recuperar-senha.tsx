@@ -6,7 +6,10 @@ export const Route = createFileRoute("/recuperar-senha")({
   head: () => ({
     meta: [
       { title: "Recuperar senha — PADS CantinIF" },
-      { name: "description", content: "Receba um código por e-mail para redefinir a senha da sua conta." },
+      {
+        name: "description",
+        content: "Receba um código por e-mail para redefinir a senha da sua conta.",
+      },
       { property: "og:title", content: "Recuperar senha — PADS" },
       { property: "og:description", content: "Redefinição de senha da conta de aluno." },
       { property: "og:type", content: "website" },
@@ -14,7 +17,10 @@ export const Route = createFileRoute("/recuperar-senha")({
     ],
   }),
   component: () => (
-    <AuthLayout titulo="Recuperar senha" subtitulo="Vamos enviar um código para o e-mail da sua conta.">
+    <AuthLayout
+      titulo="Recuperar senha"
+      subtitulo="Vamos enviar um código para o e-mail da sua conta."
+    >
       <RecoveryFlow perfil="aluno" />
     </AuthLayout>
   ),

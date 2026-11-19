@@ -3,10 +3,12 @@ import { calcularTotal, podeTransicionar, validarCarrinho, formatarBRL } from ".
 
 describe("regras do pedido", () => {
   it("total é a soma dos itens (2 coxinhas a R$ 6,50 + 1 paçoca a R$ 2,00 = R$ 15,00)", () => {
-    expect(calcularTotal([
-      { quantidade: 2, preco_unitario: 6.5 },
-      { quantidade: 1, preco_unitario: "2.00" },
-    ])).toBe(15);
+    expect(
+      calcularTotal([
+        { quantidade: 2, preco_unitario: 6.5 },
+        { quantidade: 1, preco_unitario: "2.00" },
+      ]),
+    ).toBe(15);
   });
 
   it("formata em reais", () => {
@@ -38,9 +40,11 @@ describe("regras do pedido", () => {
   });
 
   it("item duplicado é inválido", () => {
-    expect(validarCarrinho([
-      { id_produto: "a", quantidade: 1 },
-      { id_produto: "a", quantidade: 2 },
-    ])).not.toBeNull();
+    expect(
+      validarCarrinho([
+        { id_produto: "a", quantidade: 1 },
+        { id_produto: "a", quantidade: 2 },
+      ]),
+    ).not.toBeNull();
   });
 });
